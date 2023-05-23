@@ -24,6 +24,8 @@ class Home extends CI_Controller
             'sidebar'   => 'admin/sidebar',
             'page'      => 'admin/dashboard',
             'user'      => $this->admin->getCount('', 'user'),
+            'ekspedisi' => $this->admin->getCount('', 'ekspedisi'),
+            'paket'     => $this->admin->getCount('', 'paket'),
         ];
 
         $this->load->view('index', $data);

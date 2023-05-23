@@ -40,6 +40,14 @@ class M_admin extends CI_Model
 
         return $this->db->get('paket')->result();
     }
+
+    public function getProgres($where)
+    {
+        $this->db->where($where);
+        $this->db->order_by('createdAt', 'desc');
+
+        return $this->db->get('progres')->result();
+    }
 }
 
 /* End of file M_admin.php */

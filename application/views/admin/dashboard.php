@@ -30,7 +30,7 @@
                                 <h4>Ekspedisi</h4>
                             </div>
                             <div class="card-body">
-                                <?= ''; ?>
+                                <?= $ekspedisi; ?>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                                 <h4>Paket</h4>
                             </div>
                             <div class="card-body">
-                                <?= ''; ?>
+                                <?= $paket; ?>
                             </div>
                         </div>
                     </div>

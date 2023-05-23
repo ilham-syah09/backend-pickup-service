@@ -31,13 +31,24 @@ class Progres extends CI_Controller
 		$this->load->view('index', $data);
 	}
 
+	public function getList()
+	{
+		$progres = $this->admin->getProgres([
+			'idPaket' => $this->input->get('id')
+		]);
+
+		echo json_encode($progres);
+	}
+
 	public function add()
 	{
 		$data = [
-			'ekspedisi' => $this->input->post('ekspedisi')
+			'idPaket' => $this->input->post('idPaket'),
+			'status'  => $this->input->post('status'),
+			'catatan' => $this->input->post('catatan')
 		];
 
-		$insert = $this->db->insert('ekspedisi', $data);
+		$insert = $this->db->insert('progres', $data);
 
 		if ($insert) {
 			$this->session->set_flashdata('toastr-success', 'Sukses tambah data');
@@ -45,34 +56,16 @@ class Progres extends CI_Controller
 			$this->session->set_flashdata('toastr-error', 'Gagal tambah data');
 		}
 
-		redirect('admin/ekspedisi', 'refresh');
-	}
-
-	public function edit()
-	{
-		$data = [
-			'ekspedisi'         => $this->input->post('ekspedisi')
-		];
-
-		$this->db->where('id', $this->input->post('id'));
-		$update = $this->db->update('ekspedisi', $data);
-
-		if ($update) {
-			$this->session->set_flashdata('toastr-success', 'Sukses edit data');
-		} else {
-			$this->session->set_flashdata('toastr-error', 'Gagal edit data');
-		}
-
-		redirect('admin/ekspedisi', 'refresh');
+		redirect('admin/progres', 'refresh');
 	}
 
 	public function delete($id)
 	{
-		$this->db->delete('ekspedisi', ['id' => $id]);
+		$this->db->delete('progres', ['id' => $id]);
 
 		$this->session->set_flashdata('toastr-success', 'Sukses hapus data');
 
-		redirect('admin/ekspedisi', 'refresh');
+		redirect('admin/progres', 'refresh');
 	}
 }
 
