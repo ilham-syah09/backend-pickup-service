@@ -42,11 +42,41 @@ class Progres extends CI_Controller
 
 	public function add()
 	{
-		$data = [
-			'idPaket' => $this->input->post('idPaket'),
-			'status'  => $this->input->post('status'),
-			'catatan' => $this->input->post('catatan')
-		];
+		$foto = $_FILES['foto']['name'];
+
+		if ($foto) {
+			$this->load->library('upload');
+			$config['upload_path']   = './uploads/paket';
+			$config['allowed_types'] = 'jpg|jpeg|png';
+			// $config['max_size']             = 3072; // 3 mb
+			$config['remove_spaces'] = TRUE;
+			$config['detect_mime']   = TRUE;
+			$config['encrypt_name']  = TRUE;
+
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+
+			if (!$this->upload->do_upload('foto')) {
+				$this->session->set_flashdata('toastr-error', $this->upload->display_errors());
+
+				redirect('admin/barang', 'refresh');
+			} else {
+				$upload_data = $this->upload->data();
+
+				$data = [
+					'idPaket' => $this->input->post('idPaket'),
+					'status'  => $this->input->post('status'),
+					'catatan' => $this->input->post('catatan'),
+					'foto'    => $upload_data['file_name'],
+				];
+			}
+		} else {
+			$data = [
+				'idPaket' => $this->input->post('idPaket'),
+				'status'  => $this->input->post('status'),
+				'catatan' => $this->input->post('catatan')
+			];
+		}
 
 		$insert = $this->db->insert('progres', $data);
 
@@ -61,9 +91,21 @@ class Progres extends CI_Controller
 
 	public function delete($id)
 	{
-		$this->db->delete('progres', ['id' => $id]);
+		$this->db->where('id', $id);
+		$data = $this->db->get('progres')->row();
 
-		$this->session->set_flashdata('toastr-success', 'Sukses hapus data');
+		$this->db->where('id', $id);
+		$delete = $this->db->delete('progres');
+
+		if ($delete) {
+			if ($data->foto != null) {
+				unlink(FCPATH . 'uploads/paket/' . $data->foto);
+			}
+
+			$this->session->set_flashdata('toastr-sukses', 'Data berhasil dihapus');
+		} else {
+			$this->session->set_flashdata('toastr-eror', 'Data gagal dihapus!!');
+		}
 
 		redirect('admin/progres', 'refresh');
 	}

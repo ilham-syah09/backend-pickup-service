@@ -75,9 +75,10 @@
 										<thead>
 											<tr>
 												<th class="text-center">#</th>
+												<th>Tanggal</th>
 												<th>Status</th>
 												<th>Catatan</th>
-												<th>Tanggal</th>
+												<th>Foto</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -107,7 +108,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form action="<?= base_url('admin/progres/add'); ?>" method="post">
+			<form action="<?= base_url('admin/progres/add'); ?>" method="post" enctype="multipart/form-data">
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-12">
@@ -128,6 +129,12 @@
 							<div class="form-group">
 								<label>Catatan</label>
 								<textarea name="catatan" cols="30" rows="10" class="form-control"></textarea>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Foto</label>
+								<input type="file" name="foto" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -165,16 +172,17 @@
 					$('#tampil-list').removeClass('d-none');
 					$('.tr_isi-list').remove();
 
-					console.log(res);
-
 					if (res != null) {
 						$(res).each(function(i) {
 							$("#tabel-list").append(
 								`<tr class='tr_isi-list'>
                                 <td class='text-center'>${i + 1}</td>
+								<td>${res[i].createdAt}</td>
                                 <td>${res[i].status}</td>
                                 <td>${res[i].catatan}</td>
-								<td>${res[i].createdAt}</td>
+								<td>
+								${(res[i].foto != null) ? `<a href="<?= base_url('uploads/paket/'); ?>${res[i].foto}" target="_blank"><img src="<?= base_url('uploads/paket/'); ?>${res[i].foto}" alt="${res[i].status}" class="img-thumbnail" width="400"></a>` : '-'}
+								</td>
                                 <td><a href="<?= base_url('admin/progres/delete/'); ?>${res[i].id}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')" class="badge badge-danger">Delete</a></td>
                                 <tr>`
 							);

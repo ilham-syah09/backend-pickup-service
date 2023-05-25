@@ -35,21 +35,25 @@ class Paket extends CI_Controller
 			'paket.id' => $id
 		]);
 
-		echo json_encode($paket);
+		$data = [
+			'title'   => 'Lokasi Pengiriman',
+			'sidebar' => 'admin/sidebar',
+			'page'    => 'admin/alamat',
+			'setting' => $this->db->get('setting')->row(),
+			'paket'   => $paket
+		];
+
+		$this->load->view('index', $data);
 	}
 
 	public function delete($id)
 	{
 		$this->db->where('id', $id);
-		$data = $this->db->get('paket')->row();
-
-		$this->db->where('id', $id);
 		$delete = $this->db->delete('paket');
 
 		if ($delete) {
-			if ($data->foto != null) {
-				unlink(FCPATH . 'uploads/paket/' . $data->foto);
-			}
+			$this->db->where('idPaket', $id);
+			$this->db->delete('progres');
 
 			$this->session->set_flashdata('toastr-sukses', 'Data berhasil dihapus');
 		} else {

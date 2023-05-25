@@ -21,7 +21,7 @@
 											<th>Berat</th>
 											<th>Catatan</th>
 											<th>Alamat Pengiriman</th>
-											<th>Foto</th>
+											<th>Total Biaya</th>
 											<th>Status</th>
 											<th>Action</th>
 										</tr>
@@ -34,16 +34,12 @@
 												<td><?= $data->name; ?></td>
 												<td><?= $data->namaPaket; ?></td>
 												<td><?= $data->ekspedisi; ?></td>
-												<td><?= $data->berat; ?></td>
+												<td><?= $data->berat . ' Kg'; ?></td>
 												<td><?= $data->catatan; ?></td>
 												<td>
 													<a href="<?= base_url('admin/paket/alamat/' . $data->id); ?>" class="btn btn-info" target="_blank">Lihat</a>
 												</td>
-												<td>
-													<?php if ($data->foto != null) : ?>
-														<img src="<?= base_url('uploads/paket/') . $data->foto; ?>" alt="<?= $data->namPaket; ?>" class="img-thumbnail" width="400">
-													<?php endif; ?>
-												</td>
+												<td>Rp. <?= number_format($data->totalBiaya); ?></td>
 												<td><?= $data->status; ?></td>
 												<td>
 													<div class="dropdown">

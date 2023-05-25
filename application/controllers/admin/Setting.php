@@ -33,10 +33,12 @@ class Setting extends CI_Controller
 	public function edit()
 	{
 		$data = [
+			'lati'         => $this->input->post('lati'),
+			'longi'        => $this->input->post('longi'),
 			'lintangBujur' => $this->input->post('lintangBujur'),
 			'maxJarak'     => $this->input->post('maxJarak'),
-			'hargaKm'        => $this->input->post('hargaKm'),
-			'hargaKg'        => $this->input->post('hargaKg')
+			'hargaKm'      => $this->input->post('hargaKm'),
+			'hargaKg'      => $this->input->post('hargaKg')
 		];
 
 		$this->db->where('id', $this->input->post('id'));
