@@ -5,7 +5,7 @@
 
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Register Akun | <?= $nama_sekolah; ?> </title>
+	<title>Register Akun</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">
 		@media screen {
@@ -93,7 +93,7 @@
 					<tr>
 						<td align="center" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
 							<h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">
-								Supplier</h1>
+								Pick Up Service</h1>
 						</td>
 					</tr>
 				</table>
@@ -115,7 +115,7 @@
 								</tr>
 								<tr>
 									<td>Level</td>
-									<td>: Customer</td>
+									<td>: User</td>
 								</tr>
 								<tr>
 									<td>Name</td>
@@ -132,13 +132,13 @@
 							</table>
 							<h4 style="text-align: justify; color: #000;">Silahkan klik link dibawah ini untuk aktifasi akun Anda</h4>
 							<p>
-								<a href="<?= base_url('registrasi/aktifasi/' . $id); ?>">Aktifasi Akun</a>
+								<a href="<?= 'http://localhost/frontend/register/aktifasi/' . $id; ?>">Aktifasi Akun</a>
 							</p>
 						</td>
 					</tr>
 					<tr>
 						<td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-							<p style="margin: 0;">Admin,<br> Supplier</p>
+							<p style="margin: 0;">Admin,<br> Pick Up Service</p>
 						</td>
 					</tr>
 				</table>
