@@ -1,5 +1,6 @@
 <?php
-
+// Composer autoload
+// require_once __DIR__ . '/vendor/autoload.php';
 /**
  * CodeIgniter
  *
@@ -27,15 +28,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
- * @license	https://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
+ * @package CodeIgniter
+ * @author  EllisLab Dev Team
+ * @copyright   Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright   Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license https://opensource.org/licenses/MIT MIT License
+ * @link    https://codeigniter.com
+ * @since   Version 1.0.0
  * @filesource
  */
+
 
 /*
  *---------------------------------------------------------------
@@ -54,12 +56,12 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-// define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+
 if (!defined('ENVIRONMENT')) {
 	$domain = strtolower($_SERVER['HTTP_HOST']);
 
 	switch ($domain) {
-		case 'pickupservice.sewadomian.my.id':
+		case 'pickupservice.sewadomain.my.id':
 			define('ENVIRONMENT', 'production');
 			break;
 		default:
@@ -76,14 +78,10 @@ if (!defined('ENVIRONMENT')) {
  * Different environments will require different levels of error reporting.
  * By default development will show errors but testing and live will hide them.
  */
+
 switch (ENVIRONMENT) {
 	case 'development':
 		error_reporting(-1);
-		ini_set('display_errors', 1);
-		break;
-
-	case 'testing':
-	case 'production':
 		ini_set('display_errors', 1);
 		if (version_compare(PHP_VERSION, '5.3', '>=')) {
 			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
@@ -92,8 +90,12 @@ switch (ENVIRONMENT) {
 		}
 		break;
 
+	case 'production':
+		ini_set('display_errors', 1);
+		break;
+
 	default:
-		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		header('HTTP/1.1 503 Service Unavailable.', true, 503);
 		echo 'The application environment is not set correctly.';
 		exit(1); // EXIT_ERROR
 }
@@ -119,7 +121,7 @@ $system_path = 'system';
  * use an absolute (full) server path.
  * For more info please see the user guide:
  *
- * https://codeigniter.com/userguide3/general/managing_apps.html
+ * https://codeigniter.com/user_guide/general/managing_apps.html
  *
  * NO TRAILING SLASH!
  */
@@ -168,7 +170,7 @@ $view_folder = '';
 // $routing['controller'] = '';
 
 // The controller function you wish to be called.
-// $routing['function']	= '';
+// $routing['function'] = '';
 
 
 /*
@@ -204,7 +206,7 @@ if (defined('STDIN')) {
 	chdir(dirname(__FILE__));
 }
 
-if (($_temp = realpath($system_path)) !== FALSE) {
+if (($_temp = realpath($system_path)) !== false) {
 	$system_path = $_temp . DIRECTORY_SEPARATOR;
 } else {
 	// Ensure there's a trailing slash
@@ -217,7 +219,7 @@ if (($_temp = realpath($system_path)) !== FALSE) {
 
 // Is the system path correct?
 if (!is_dir($system_path)) {
-	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+	header('HTTP/1.1 503 Service Unavailable.', true, 503);
 	echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: ' . pathinfo(__FILE__, PATHINFO_BASENAME);
 	exit(3); // EXIT_CONFIG
 }
@@ -241,7 +243,7 @@ define('SYSDIR', basename(BASEPATH));
 
 // The path to the "application" directory
 if (is_dir($application_folder)) {
-	if (($_temp = realpath($application_folder)) !== FALSE) {
+	if (($_temp = realpath($application_folder)) !== false) {
 		$application_folder = $_temp;
 	} else {
 		$application_folder = strtr(
@@ -257,7 +259,7 @@ if (is_dir($application_folder)) {
 		DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR
 	);
 } else {
-	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+	header('HTTP/1.1 503 Service Unavailable.', true, 503);
 	echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF;
 	exit(3); // EXIT_CONFIG
 }
@@ -268,7 +270,7 @@ define('APPPATH', $application_folder . DIRECTORY_SEPARATOR);
 if (!isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR)) {
 	$view_folder = APPPATH . 'views';
 } elseif (is_dir($view_folder)) {
-	if (($_temp = realpath($view_folder)) !== FALSE) {
+	if (($_temp = realpath($view_folder)) !== false) {
 		$view_folder = $_temp;
 	} else {
 		$view_folder = strtr(
@@ -284,7 +286,7 @@ if (!isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR)) 
 		DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR
 	);
 } else {
-	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+	header('HTTP/1.1 503 Service Unavailable.', true, 503);
 	echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF;
 	exit(3); // EXIT_CONFIG
 }
