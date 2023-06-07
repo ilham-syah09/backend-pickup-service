@@ -20,6 +20,12 @@ class Register extends RestController
 
 		if ($this->form_validation->run() == FALSE) {
 			$message = validation_errors();
+
+			$response = [
+				'status'  => false,
+				'message' => $message,
+				'data'    => $dt
+			];
 		} else {
 			$username = $this->post('username');
 			$name     = $this->post('name');
@@ -48,16 +54,22 @@ class Register extends RestController
 				];
 
 				$message = 'Registrasi berhasil';
+
+				$response = [
+					'status'  => true,
+					'message' => $message,
+					'data'    => $dt
+				];
 			} else {
 				$message = 'Registrasi gagal';
+
+				$response = [
+					'status'  => false,
+					'message' => $message,
+					'data'    => $dt
+				];
 			}
 		}
-
-		$response = [
-			'status'  => true,
-			'message' => $message,
-			'data'    => $dt
-		];
 
 		$this->response($response, 200);
 	}

@@ -20,11 +20,19 @@ class Login extends RestController
 
 		if ($this->form_validation->run() == FALSE) {
 			$message = validation_errors();
+
+			$response = [
+				'status'  => false,
+				'message' => $message,
+				'data'    => $dt
+			];
 		} else {
 			$username = $this->post('username');
 			$password = $this->post('password');
 
 			$this->db->where('username', $username);
+			$this->db->where('role_id', 2);
+
 			$query = $this->db->get('user');
 			$data = $query->row();
 
@@ -32,23 +40,42 @@ class Login extends RestController
 				if (password_verify($password, $data->password)) {
 					if ($data->role_id == 2 && $data->status == 0) {
 						$message = 'Akun belum aktif, silahkan cek email Anda';
+
+						$response = [
+							'status'  => false,
+							'message' => $message,
+							'data'    => $dt
+						];
 					} else {
 						$message = 'Login berhasil';
 						$dt = $data;
+						$dt->image = base_url('uploads/profile/' . $data->image);
+
+						$response = [
+							'status'  => true,
+							'message' => $message,
+							'data'    => $dt
+						];
 					}
 				} else {
 					$message = 'Username atau Password Salah!!';
+
+					$response = [
+						'status'  => false,
+						'message' => $message,
+						'data'    => $dt
+					];
 				}
 			} else {
 				$message = 'Username atau Password Salah!!';
+
+				$response = [
+					'status'  => false,
+					'message' => $message,
+					'data'    => $dt
+				];
 			}
 		}
-
-		$response = [
-			'status'  => true,
-			'message' => $message,
-			'data'    => $dt
-		];
 
 		$this->response($response, 200);
 	}

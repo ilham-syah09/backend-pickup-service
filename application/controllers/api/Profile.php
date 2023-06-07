@@ -20,12 +20,19 @@ class Profile extends RestController
 
 		if ($this->form_validation->run() == FALSE) {
 			$message = validation_errors();
+
+			$response = [
+				'status'  => false,
+				'message' => $message,
+				'data'    => $dt
+			];
 		} else {
 			$id = $this->post('id');
 			$name = $this->post('name');
 			$password = $this->post('password');
 
 			$image = (isset($_FILES['image']) ? $_FILES['image']['name'] : '');
+			// $image = $this->post('iamge');
 
 			if ($image) {
 				$this->load->library('upload');
@@ -52,7 +59,7 @@ class Profile extends RestController
 				} else {
 					$upload_data = $this->upload->data();
 
-					if ($password) {
+					if ($password != "") {
 						$data = [
 							'name' => $name,
 							'password' => password_hash($password, PASSWORD_BCRYPT),
@@ -60,8 +67,8 @@ class Profile extends RestController
 						];
 					} else {
 						$data = [
-							'name' => $name,
-							'image'    => $upload_data['file_name'],
+							'name'  => $name,
+							'image' => $upload_data['file_name'],
 						];
 					}
 				}
@@ -86,7 +93,7 @@ class Profile extends RestController
 
 			if ($update) {
 				if ($image) {
-					if ($user->image != null || $user->image != 'default.png') {
+					if ($user->image != 'default.png') {
 						unlink(FCPATH . 'uploads/profile/' . $user->image);
 					}
 				}
@@ -95,17 +102,25 @@ class Profile extends RestController
 				$user = $this->db->get('user')->row();
 
 				$dt = $user;
+				$dt->image = base_url('uploads/profile/' . $user->image);
+
 				$message = 'Update profile berhasil';
+
+				$response = [
+					'status'  => true,
+					'message' => $message,
+					'data'    => $dt
+				];
 			} else {
 				$message = 'Server error!!';
+
+				$response = [
+					'status'  => false,
+					'message' => $message,
+					'data'    => $dt
+				];
 			}
 		}
-
-		$response = [
-			'status'  => true,
-			'message' => $message,
-			'data'    => $dt
-		];
 
 		$this->response($response, 200);
 	}
