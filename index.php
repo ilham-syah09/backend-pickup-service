@@ -1,6 +1,7 @@
 <?php
 // Composer autoload
-// require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
+
 /**
  * CodeIgniter
  *
@@ -59,6 +60,7 @@
 
 if (!defined('ENVIRONMENT')) {
 	$domain = strtolower($_SERVER['HTTP_HOST']);
+	// define('ENVIRONMENT', 'development');
 
 	switch ($domain) {
 		case 'pickupservice.sewadomain.my.id':
