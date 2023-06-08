@@ -15,11 +15,10 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-lg-12">
-									<label>Jarak <sup>(Meter)</sup></label>
-									<input type="text" class="form-control" name="jarak" value="<?= $paket[0]->jarak; ?>" id="jarak">
-								</div>
-								<div class="col-lg-12">
 									<div id="map" style="width: 100%; height: 70vh;"></div>
+								</div>
+								<div class="col-lg-12 text-right mt-3">
+									<a href="<?= base_url('admin/paket'); ?>" type="button" class="btn btn-warning">Kembali</a>
 								</div>
 							</div>
 						</div>
@@ -55,8 +54,8 @@
 	let latiKantor = <?= $setting->lati; ?>;
 	let longiKantor = <?= $setting->longi; ?>;
 
-	let latiTujuan = <?= $paket[0]->lati; ?>;
-	let longiTujuan = <?= $paket[0]->longi; ?>;
+	let latiJemput = <?= $paket[0]->lati; ?>;
+	let longiJemput = <?= $paket[0]->longi; ?>;
 
 	const map = L.map('map', {
 		center: [latiKantor, longiKantor],
@@ -77,7 +76,7 @@
 	var routingControl = L.Routing.control({
 		waypoints: [
 			L.latLng(latiKantor, longiKantor), //titik awal
-			L.latLng(latiTujuan, longiTujuan) //titik akhir
+			L.latLng(latiJemput, longiJemput) //titik akhir
 		]
 	}).addTo(map);
 

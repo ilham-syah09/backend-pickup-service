@@ -36,7 +36,7 @@ class Paket extends CI_Controller
 		]);
 
 		$data = [
-			'title'   => 'Lokasi Pengiriman',
+			'title'   => 'Lokasi Penjemputan',
 			'sidebar' => 'admin/sidebar',
 			'page'    => 'admin/alamat',
 			'setting' => $this->db->get('setting')->row(),

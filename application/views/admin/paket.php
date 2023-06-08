@@ -20,7 +20,7 @@
 											<th>Ekspedisi</th>
 											<th>Berat</th>
 											<th>Catatan</th>
-											<th>Alamat Pengiriman</th>
+											<th>Alamat Penjemputan</th>
 											<th>Total Biaya</th>
 											<th>Status</th>
 											<th>Action</th>
@@ -37,7 +37,7 @@
 												<td><?= $data->berat . ' Kg'; ?></td>
 												<td><?= $data->catatan; ?></td>
 												<td>
-													<a href="<?= base_url('admin/paket/alamat/' . $data->id); ?>" class="btn btn-info" target="_blank">Lihat</a>
+													<a href="<?= base_url('admin/paket/alamat/' . $data->id); ?>" class="btn btn-info">Lihat</a>
 												</td>
 												<td>Rp. <?= number_format($data->totalBiaya); ?></td>
 												<td><?= $data->status; ?></td>

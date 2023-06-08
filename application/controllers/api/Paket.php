@@ -13,12 +13,17 @@ class Paket extends RestController
 
 	public function index_get()
 	{
+		$id = $this->get('id');
 		$idUser = $this->get('idUser');
 
 		$this->db->select('paket.*, ekspedisi.ekspedisi');
 		$this->db->join('ekspedisi', 'ekspedisi.id = paket.idEkspedisi', 'inner');
 
-		$this->db->where('paket.idUser', $idUser);
+		if ($id) {
+			$this->db->where('paket.id', $id);
+		} else {
+			$this->db->where('paket.idUser', $idUser);
+		}
 
 		$this->db->order_by('paket.id', 'desc');
 		$data = $this->db->get('paket')->result();
