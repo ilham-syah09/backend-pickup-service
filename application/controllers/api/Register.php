@@ -141,7 +141,7 @@ class Register extends RestController
 		$config['mailtype'] = "html";
 		$config['smtp_host'] = "ssl://smtp.gmail.com";
 		$config['smtp_port'] = "465";
-		$config['smtp_timeout'] = "5";
+		$config['smtp_timeout'] = "7";
 		$config['priority'] = 3;
 		$config['smtp_user'] = "teguhpriyadi043@gmail.com";
 		$config['smtp_pass'] = 'bggssjnpctkjozzt';
