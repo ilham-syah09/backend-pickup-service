@@ -149,6 +149,7 @@ class Register extends RestController
 		$config['newline'] = "\r\n";
 		$config['wordwrap'] = TRUE;
 		$this->email->initialize($config);
+		$this->email->set_newline("\r\n");
 		$this->email->from($config['smtp_user'], 'Pick Up Service');
 		$this->email->to($data['username']);
 		$this->email->subject('Registrasi Akun');
