@@ -135,11 +135,11 @@ class Register extends RestController
 	{
 		$this->load->library('email');
 		$config = array();
-		$config['charset'] = 'utf-8';
+		$config['charset'] = 'iso-8859-1';
 		$config['useragent'] = 'Codeigniter';
 		$config['protocol'] = "smtp";
 		$config['mailtype'] = "html";
-		$config['smtp_host'] = "driftmail.extremhost.net";
+		$config['smtp_host'] = "ssl://smtp.gmail.com";
 		$config['smtp_port'] = "465";
 		$config['smtp_timeout'] = "5";
 		$config['priority'] = 3;
