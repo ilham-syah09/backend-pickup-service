@@ -139,8 +139,8 @@ class Register extends RestController
 		$config['useragent'] = 'Codeigniter';
 		$config['protocol'] = "smtp";
 		$config['mailtype'] = "html";
-		$config['smtp_host'] = "ssl://smtp.gmail.com";
-		$config['smtp_port'] = "587";
+		$config['smtp_host'] = "driftmail.extremhost.net";
+		$config['smtp_port'] = "465";
 		$config['smtp_timeout'] = "5";
 		$config['priority'] = 3;
 		$config['smtp_user'] = "teguhpriyadi043@gmail.com";
@@ -149,7 +149,6 @@ class Register extends RestController
 		$config['newline'] = "\r\n";
 		$config['wordwrap'] = TRUE;
 		$this->email->initialize($config);
-		$this->email->set_newline("\r\n");
 		$this->email->from($config['smtp_user'], 'Pick Up Service');
 		$this->email->to($data['username']);
 		$this->email->subject('Registrasi Akun');
