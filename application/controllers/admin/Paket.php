@@ -20,10 +20,10 @@ class Paket extends CI_Controller
 	public function index()
 	{
 		$data = [
-			'title'     => 'List Paket',
-			'sidebar'   => 'admin/sidebar',
-			'page'      => 'admin/paket',
-			'paket' => $this->admin->getPaket()
+			'title'   => 'List Paket',
+			'sidebar' => 'admin/sidebar',
+			'page'    => 'admin/paket',
+			'paket'   => $this->admin->getPaket()
 		];
 
 		$this->load->view('index', $data);

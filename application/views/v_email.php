@@ -132,7 +132,7 @@
 							</table>
 							<h4 style="text-align: justify; color: #000;">Silahkan klik link dibawah ini untuk aktifasi akun Anda</h4>
 							<p>
-								<a href="<?= 'http://localhost/frontend-pickup-service/registrasi/aktifasi/' . $id; ?>">Aktifasi Akun</a>
+								<a href="<?= $urlFrontEnd . $id; ?>">Aktifasi Akun</a>
 							</p>
 						</td>
 					</tr>

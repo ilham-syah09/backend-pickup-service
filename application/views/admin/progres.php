@@ -120,8 +120,8 @@
 									<option value="Return">Return</option>
 									<option value="Refund">Refund</option>
 									<option value="Reject">Reject</option>
-									<option value="Dikirim">Dikirim</option>
-									<option value="Diterima">Diterima</option>
+									<option value="Dijemput">Dijemput</option>
+									<option value="Sampai">Sampai</option>
 								</select>
 							</div>
 						</div>

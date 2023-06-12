@@ -27,8 +27,9 @@ class Register extends RestController
 				'data'    => $dt
 			];
 		} else {
-			$username = $this->post('username');
-			$name     = $this->post('name');
+			$username    = $this->post('username');
+			$name        = $this->post('name');
+			$urlFrontEnd = $this->post('url');
 
 			$this->db->insert('user', [
 				'name'     => $name,
@@ -44,7 +45,8 @@ class Register extends RestController
 					'id'       => $insert_id,
 					'name'     => $name,
 					'username' => $username,
-					'password' => 'user123'
+					'password' => 'user123',
+					'urlFrontEnd'		=> $urlFrontEnd
 				]);
 
 				$dt = [
@@ -141,8 +143,8 @@ class Register extends RestController
 		$config['smtp_port'] = "465";
 		$config['smtp_timeout'] = "5";
 		$config['priority'] = 3;
-		$config['smtp_user'] = "maykomputer2019@gmail.com";
-		$config['smtp_pass'] = 'qnslsfcdcgwwlitg';
+		$config['smtp_user'] = "teguhpriyadi043@gmail.com";
+		$config['smtp_pass'] = 'bggssjnpctkjozzt';
 		$config['crlf'] = "\r\n";
 		$config['newline'] = "\r\n";
 		$config['wordwrap'] = TRUE;

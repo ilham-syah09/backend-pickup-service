@@ -16,8 +16,9 @@ class Paket extends RestController
 		$id = $this->get('id');
 		$idUser = $this->get('idUser');
 
-		$this->db->select('paket.*, ekspedisi.ekspedisi');
+		$this->db->select('paket.*, ekspedisi.ekspedisi, transaksi.payment_type, transaksi.transaction_time, transaksi.bank, transaksi.va_numbers, transaksi.pdf_url, transaksi.status_code');
 		$this->db->join('ekspedisi', 'ekspedisi.id = paket.idEkspedisi', 'inner');
+		$this->db->join('transaksi', 'transaksi.idPaket = paket.id', 'left');
 
 		if ($id) {
 			$this->db->where('paket.id', $id);

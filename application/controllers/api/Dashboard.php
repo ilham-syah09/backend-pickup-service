@@ -19,13 +19,18 @@ class Dashboard extends RestController
 
 		$totalPaket = $this->db->get('paket')->num_rows();
 
-		$this->db->where('status !=', 'Lunas');
-		$this->db->where('idUser', $idUser);
+		$this->db->join('transaksi', 'transaksi.idPaket = paket.id', 'left');
+
+		$this->db->where('transaksi.status_code !=', 200);
+
+		$this->db->where('paket.idUser', $idUser);
 
 		$totalBelumLunas = $this->db->get('paket')->num_rows();
 
-		$this->db->where('status', 'Lunas');
-		$this->db->where('idUser', $idUser);
+		$this->db->join('transaksi', 'transaksi.idPaket = paket.id', 'left');
+
+		$this->db->where('transaksi.status_code', 200);
+		$this->db->where('paket.idUser', $idUser);
 
 		$totalLunas = $this->db->get('paket')->num_rows();
 

@@ -15,16 +15,44 @@ class Progres extends RestController
 	{
 		$idPaket = $this->get('idPaket');
 
+		if (!$idPaket) {
+			$response = [
+				'status'  => false,
+				'message' => 'ID Paket cannot be empty'
+			];
+
+			$this->response($response, 200);
+
+			die;
+		}
+
 		$this->db->where('idPaket', $idPaket);
 		$this->db->order_by('createdAt', 'desc');
 
 		$data = $this->db->get('progres')->result();
 
-		$response = [
-			'status'  => true,
-			'message' => 'Get data sukses',
-			'data'    => $data
-		];
+		if ($data) {
+			$newData = [];
+
+			foreach ($data as $dt) {
+				array_push($newData, [
+					'status' => $dt->status,
+					'catatan' => $dt->catatan,
+					'foto'	=> ($dt->foto != null) ? base_url('uploads/paket/' . $dt->foto) : null
+				]);
+			}
+
+			$response = [
+				'status'  => true,
+				'message' => 'Get data sukses',
+				'data'    => $newData
+			];
+		} else {
+			$response = [
+				'status'  => false,
+				'message' => 'Get data gagal'
+			];
+		}
 
 		$this->response($response, 200);
 	}

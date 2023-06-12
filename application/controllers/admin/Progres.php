@@ -24,7 +24,7 @@ class Progres extends CI_Controller
 			'sidebar' => 'admin/sidebar',
 			'page'    => 'admin/progres',
 			'paket'   => $this->admin->getPaket([
-				'paket.status' => 'Lunas'
+				'transaksi.status_code !=' => null
 			])
 		];
 

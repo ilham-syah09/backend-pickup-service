@@ -29,9 +29,10 @@ class M_admin extends CI_Model
 
     public function getPaket($where = null)
     {
-        $this->db->select('paket.*, user.name, ekspedisi.ekspedisi');
+        $this->db->select('paket.*, user.name, ekspedisi.ekspedisi, transaksi.payment_type, transaksi.transaction_time, transaksi.bank, transaksi.va_numbers, transaksi.pdf_url, transaksi.status_code');
         $this->db->join('user', 'user.id = paket.idUser', 'inner');
         $this->db->join('ekspedisi', 'ekspedisi.id = paket.idEkspedisi', 'inner');
+        $this->db->join('transaksi', 'transaksi.idPaket = paket.id', 'left');
 
         if ($where != null) {
             $this->db->where($where);
