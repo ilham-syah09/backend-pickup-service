@@ -76,8 +76,7 @@ class Paket extends RestController
 				'lati'        => $lati,
 				'longi'       => $longi,
 				'catatan'     => $catatan,
-				'totalBiaya'  => $totalBiaya,
-				'status'	  => 'Menunggu'
+				'totalBiaya'  => $totalBiaya
 			]);
 
 			if ($insert) {
