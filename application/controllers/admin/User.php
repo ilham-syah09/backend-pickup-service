@@ -95,6 +95,24 @@ class User extends CI_Controller
 
 		redirect('admin/user', 'refresh');
 	}
+
+	public function aktifasi($id)
+	{
+		$data = [
+			'status' => 1
+		];
+
+		$this->db->where('id', $id);
+		$update = $this->db->update('user', $data);
+
+		if ($update) {
+			$this->session->set_flashdata('toastr-success', 'Sukses aktifasi akun');
+		} else {
+			$this->session->set_flashdata('toastr-error', 'Gagal aktifasi akun');
+		}
+
+		redirect('admin/user', 'refresh');
+	}
 }
 
   /* End of file User.php */

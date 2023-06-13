@@ -49,6 +49,7 @@
 															<a href="<?= base_url('admin/user/delete/' . $data->id); ?>" class="dropdown-item"><i class="fas fa-trash"></i> Delete</a>
 															<a href="javascript:void(0)" class="dropdown-item edit_btn" data-toggle="modal" data-target="#modalEdit" data-id="<?= $data->id; ?>" data-name="<?= $data->name; ?>" data-username="<?= $data->username; ?>" data-status="<?= $data->status; ?>"><i class="fas fa-arrow-left"></i> Edit</a>
 															<a href="<?= base_url('admin/user/resetPwd/' . $data->id); ?>" class="dropdown-item"><i class="fas fa-arrow-left"></i> Reset Password</a>
+															<a href="<?= base_url('admin/user/aktifasi/' . $data->id); ?>" class="dropdown-item"><i class="fas fa-arrow-left"></i> Aktifkan Akun</a>
 														</div>
 													</div>
 												</td>
