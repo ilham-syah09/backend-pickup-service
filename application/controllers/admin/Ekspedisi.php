@@ -19,6 +19,7 @@ class Ekspedisi extends CI_Controller
 
 	public function index()
 	{
+
 		$data = [
 			'title'     => 'List Ekspedisi',
 			'sidebar'   => 'admin/sidebar',
@@ -31,37 +32,53 @@ class Ekspedisi extends CI_Controller
 
 	public function add()
 	{
-		$data = [
-			'ekspedisi' => $this->input->post('ekspedisi')
-		];
+		$this->form_validation->set_rules('ekspedisi', 'Ekspedisi', 'required');
 
-		$insert = $this->db->insert('ekspedisi', $data);
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('toastr-error', validation_errors());
 
-		if ($insert) {
-			$this->session->set_flashdata('toastr-success', 'Sukses tambah data');
+			redirect('admin/ekspedisi', 'refresh');
 		} else {
-			$this->session->set_flashdata('toastr-error', 'Gagal tambah data');
-		}
+			$data = [
+				'ekspedisi' => $this->input->post('ekspedisi')
+			];
 
-		redirect('admin/ekspedisi', 'refresh');
+			$insert = $this->db->insert('ekspedisi', $data);
+
+			if ($insert) {
+				$this->session->set_flashdata('toastr-success', 'Sukses tambah data');
+			} else {
+				$this->session->set_flashdata('toastr-error', 'Gagal tambah data');
+			}
+
+			redirect('admin/ekspedisi', 'refresh');
+		}
 	}
 
 	public function edit()
 	{
-		$data = [
-			'ekspedisi'         => $this->input->post('ekspedisi')
-		];
+		$this->form_validation->set_rules('ekspedisi', 'Ekspedisi', 'required');
 
-		$this->db->where('id', $this->input->post('id'));
-		$update = $this->db->update('ekspedisi', $data);
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('toastr-error', validation_errors());
 
-		if ($update) {
-			$this->session->set_flashdata('toastr-success', 'Sukses edit data');
+			redirect('admin/ekspedisi', 'refresh');
 		} else {
-			$this->session->set_flashdata('toastr-error', 'Gagal edit data');
-		}
+			$data = [
+				'ekspedisi'         => $this->input->post('ekspedisi')
+			];
 
-		redirect('admin/ekspedisi', 'refresh');
+			$this->db->where('id', $this->input->post('id'));
+			$update = $this->db->update('ekspedisi', $data);
+
+			if ($update) {
+				$this->session->set_flashdata('toastr-success', 'Sukses edit data');
+			} else {
+				$this->session->set_flashdata('toastr-error', 'Gagal edit data');
+			}
+
+			redirect('admin/ekspedisi', 'refresh');
+		}
 	}
 
 	public function delete($id)

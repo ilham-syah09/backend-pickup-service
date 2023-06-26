@@ -69,7 +69,7 @@
 				<form action="<?= base_url('admin/ekspedisi/add'); ?>" method="post">
 					<div class="form-group">
 						<label>Nama Ekspedisi</label>
-						<input type="text" class="form-control" name="ekspedisi">
+						<input type="text" class="form-control" name="ekspedisi" required>
 					</div>
 					<div class="modal-footer bg-whitesmoke br">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -96,7 +96,7 @@
 					<input type="hidden" name="id" id="id">
 					<div class="form-group">
 						<label>Nama Ekspedisi</label>
-						<input type="text" class="form-control" name="ekspedisi" id="ekspedisi">
+						<input type="text" class="form-control" name="ekspedisi" id="ekspedisi" required>
 					</div>
 					<div class="modal-footer bg-whitesmoke br">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

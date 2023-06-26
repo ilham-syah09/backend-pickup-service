@@ -17,15 +17,32 @@ class Progres extends CI_Controller
 		$this->load->model('M_admin', 'admin');
 	}
 
-	public function index()
+	public function index($tanggal_awal = null, $tanggal_akhir = null)
 	{
+		if (!$tanggal_awal) {
+			$tanggal_awal = date('Y-m-d');
+		}
+
+		if (!$tanggal_akhir) {
+			$tanggal_akhir = date('Y-m-d');
+		}
+
+		if ($tanggal_awal > $tanggal_akhir) {
+			$this->session->set_flashdata('toastr-error', 'Tanggal awal tidak boleh melebihi tanggal akhir !');
+			redirect($_SERVER['HTTP_REFERER'], 'refresh');
+		}
+
 		$data = [
 			'title'   => 'Progres Pengiriman Paket',
 			'sidebar' => 'admin/sidebar',
 			'page'    => 'admin/progres',
 			'paket'   => $this->admin->getPaket([
-				'transaksi.status_code !=' => null
-			])
+				'transaksi.status_code !=' => null,
+				'DATE(paket.createdAt) >=' => $tanggal_awal,
+				'DATE(paket.createdAt) <=' => $tanggal_akhir,
+			]),
+			'tanggal_awal'  => $tanggal_awal,
+			'tanggal_akhir' => $tanggal_akhir
 		];
 
 		$this->load->view('index', $data);
