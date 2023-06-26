@@ -20,6 +20,7 @@
 											<th>Ekspedisi</th>
 											<th>Berat</th>
 											<th>Catatan</th>
+											<th>Tanggal Order</th>
 											<th>Alamat Penjemputan</th>
 											<th>Total Biaya</th>
 											<th>Status</th>
@@ -36,6 +37,7 @@
 												<td><?= $data->ekspedisi; ?></td>
 												<td><?= $data->berat . ' Kg'; ?></td>
 												<td><?= $data->catatan; ?></td>
+												<td><?= date('d M Y - H:i:s', strtotime($data->createdAt)); ?></td>
 												<td>
 													<a href="<?= base_url('admin/paket/alamat/' . $data->id); ?>" class="btn btn-info">Lihat</a>
 												</td>
