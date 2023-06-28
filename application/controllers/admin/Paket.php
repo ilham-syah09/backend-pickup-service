@@ -17,13 +17,31 @@ class Paket extends CI_Controller
 		$this->load->model('M_admin', 'admin');
 	}
 
-	public function index()
+	public function index($tanggal_awal = null, $tanggal_akhir = null)
 	{
+		if (!$tanggal_awal) {
+			$tanggal_awal = date('Y-m-d');
+		}
+
+		if (!$tanggal_akhir) {
+			$tanggal_akhir = date('Y-m-d');
+		}
+
+		if ($tanggal_awal > $tanggal_akhir) {
+			$this->session->set_flashdata('toastr-error', 'Tanggal awal tidak boleh melebihi tanggal akhir !');
+			redirect($_SERVER['HTTP_REFERER'], 'refresh');
+		}
+
 		$data = [
 			'title'   => 'List Paket',
 			'sidebar' => 'admin/sidebar',
 			'page'    => 'admin/paket',
-			'paket'   => $this->admin->getPaket()
+			'paket'   => $this->admin->getPaket([
+				'DATE(paket.createdAt) >=' => $tanggal_awal,
+				'DATE(paket.createdAt) <=' => $tanggal_akhir,
+			]),
+			'tanggal_awal'  => $tanggal_awal,
+			'tanggal_akhir' => $tanggal_akhir
 		];
 
 		$this->load->view('index', $data);

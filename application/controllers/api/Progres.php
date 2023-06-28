@@ -36,9 +36,10 @@ class Progres extends RestController
 
 			foreach ($data as $dt) {
 				array_push($newData, [
-					'status' => $dt->status,
+					'status'  => $dt->status,
 					'catatan' => $dt->catatan,
-					'foto'	=> ($dt->foto != null) ? base_url('uploads/paket/' . $dt->foto) : null
+					'foto'    => ($dt->foto != null) ? base_url('uploads/paket/' . $dt->foto) : null,
+					'tanggal' => date('d M Y - H:i:s')
 				]);
 			}
 

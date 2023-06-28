@@ -37,7 +37,7 @@ class Progres extends CI_Controller
 			'sidebar' => 'admin/sidebar',
 			'page'    => 'admin/progres',
 			'paket'   => $this->admin->getPaket([
-				'transaksi.status_code !=' => null,
+				'transaksi.status_code' => 200,
 				'DATE(paket.createdAt) >=' => $tanggal_awal,
 				'DATE(paket.createdAt) <=' => $tanggal_akhir,
 			]),
@@ -103,7 +103,7 @@ class Progres extends CI_Controller
 			$this->session->set_flashdata('toastr-error', 'Gagal tambah data');
 		}
 
-		redirect('admin/progres', 'refresh');
+		redirect($_SERVER['HTTP_REFERER'], 'refresh');
 	}
 
 	public function delete($id)
@@ -124,7 +124,7 @@ class Progres extends CI_Controller
 			$this->session->set_flashdata('toastr-eror', 'Data gagal dihapus!!');
 		}
 
-		redirect('admin/progres', 'refresh');
+		redirect($_SERVER['HTTP_REFERER'], 'refresh');
 	}
 }
 
