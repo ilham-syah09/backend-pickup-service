@@ -71,9 +71,24 @@ class User extends CI_Controller
 
 	public function delete($id)
 	{
-		$this->db->delete('user', ['id' => $id]);
+		$delete = $this->db->delete('user', ['id' => $id]);
 
-		$this->session->set_flashdata('toastr-success', 'Sukses hapus data');
+		if ($delete) {
+			$this->db->where('idUser', $id);
+			$paket = $this->db->get('paket')->result();
+
+			if ($paket) {
+				foreach ($paket as $p) {
+					$this->db->delete('progres', ['idPaket' => $p->id]);
+					$this->db->delete('transaksi', ['idPaket' => $p->id]);
+				}
+			}
+
+			$this->db->delete('paket', ['idUser' => $id]);
+			$this->db->delete('transaksi', ['idUser' => $id]);
+
+			$this->session->set_flashdata('toastr-success', 'Sukses hapus data');
+		}
 
 		redirect('admin/user', 'refresh');
 	}
